@@ -31,6 +31,16 @@ interface TechNoAPI {
         @Query("quantidade") amount: Int = 0
     ): SemesterCompleteDTO
 
+    @GET("diario/periodos-letivos")
+    suspend fun allSemestersWithInfo(
+        @Path("semesterId") semesterId: Long,
+        @Query("idPessoa") id: Long,
+        @Query("perfil") profile: Int = 1,
+        @Query("campos", encoded = true) fields: String = "itens(id,codigo,descricao,turmas(itens(id,limiteFaltas,resultado(-%24link),classes(itens(id,descricao,tipo,alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(id,nome,codigo,ementa,cargaHoraria),ultimaAula(data),proximaAula(data),avaliacoes(itens(nome,nomeResumido,nota,avaliacoes(itens(ordinal,nomeResumido,data,peso,nota(valor))))),periodoLetivo(codigo))))",
+        @Query("embutir", encoded = true) append: String = "itens(turmas(itens(resultado,classes(itens(alocacoes(itens(espacoFisico,horario)))),atividadeCurricular,ultimaAula,proximaAula,avaliacoes(itens(avaliacoes(itens(nota)))),periodoLetivo(codigo))))",
+        @Query("quantidade") amount: Int = 0
+    ): Items<SemesterCompleteDTO>
+
     @GET("diario/turmas")
     suspend fun classes(
         @Query("idPessoa") profileId: Long,
