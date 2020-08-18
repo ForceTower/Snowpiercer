@@ -1,7 +1,9 @@
 package dev.forcetower.breaker.service
 
 import dev.forcetower.breaker.dto.aggregators.Items
+import dev.forcetower.breaker.dto.aggregators.ItemsTimed
 import dev.forcetower.breaker.dto.base.DisciplineCompleteDTO
+import dev.forcetower.breaker.dto.base.MessageDTO
 import dev.forcetower.breaker.dto.base.SemesterCompleteDTO
 import dev.forcetower.breaker.model.Person
 import dev.forcetower.breaker.model.Semester
@@ -50,6 +52,16 @@ interface TechNoAPI {
         @Query("campos", encoded = true) fields: String = "itens(id,atividadeCurricular(id,codigo,nome,ementa,cargaHoraria),classes(itens(id,tipo,descricao,alocacoes(itens(espacoFisico,horario)))))",
         @Query("quantidade") amount: Int = 0
     ): Items<DisciplineCompleteDTO>
+
+    @GET("diario/recados")
+    suspend fun messages(
+        @Query("idPessoa") profileId: Long,
+        @Query("ate") until: String = "",
+        @Query("quantidade") amount: Int = 10,
+        @Query("perfil") profile: Int = 1,
+        @Query("embutir", encoded = true) append: String = "itens(remetente,escopos(itens(departamento(nome),professor(nome))))",
+        @Query("campos", encoded = true) fields: String = "itens(descricao,timeStamp,remetente(nome),perfilRemetente,escopos(itens(departamento(nome),professor(nome)))),maisAntigos",
+    ): ItemsTimed<MessageDTO>
 
     @GET("diario/eventos-academicos")
     suspend fun events(

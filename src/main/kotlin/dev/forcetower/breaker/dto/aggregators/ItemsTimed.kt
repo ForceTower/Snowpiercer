@@ -2,7 +2,7 @@ package dev.forcetower.breaker.dto.aggregators
 
 import com.google.gson.annotations.SerializedName
 
-data class ItemsNewer<T>(
+data class ItemsTimed<T>(
     @SerializedName("maisAntigos")
     val nextPage: Linker?,
     @SerializedName("maisRecentes")

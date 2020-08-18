@@ -2,12 +2,10 @@ package dev.forcetower.breaker
 
 import com.google.gson.GsonBuilder
 import dev.forcetower.breaker.json.StringJsonPattern
-import dev.forcetower.breaker.model.Authorization
-import dev.forcetower.breaker.model.DisciplineData
-import dev.forcetower.breaker.model.Person
-import dev.forcetower.breaker.model.Semester
+import dev.forcetower.breaker.model.*
 import dev.forcetower.breaker.operation.GradesOperation
 import dev.forcetower.breaker.operation.LoginOperation
+import dev.forcetower.breaker.operation.MessagesOperation
 import dev.forcetower.breaker.operation.SemestersOperation
 import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
@@ -68,6 +66,10 @@ class Orchestra(
 
     suspend fun grades(profileId: Long, semesterId: Long): Outcome<List<DisciplineData>> {
         return GradesOperation(profileId, semesterId).execute(service)
+    }
+
+    suspend fun messages(profileId: Long, until: String = ""): Outcome<MessagesDataPage> {
+        return MessagesOperation(profileId, until).execute(service)
     }
 
     class Builder {

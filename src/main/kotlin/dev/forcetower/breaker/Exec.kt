@@ -55,6 +55,14 @@ fun main() {
 
                 println("---------------------------------------------------")
             }
+
+            val messages = (orchestra.messages(person.id) as Outcome.Success).value
+            messages.messages.forEach { message ->
+                println("Message:")
+                println(message.content)
+                println("From ${message.sender}")
+                println("Sent at: ${message.timestamp}")
+            }
         }
     }
     exitProcess(0)
