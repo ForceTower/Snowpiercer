@@ -35,11 +35,10 @@ interface TechNoAPI {
 
     @GET("diario/periodos-letivos")
     suspend fun allSemestersWithInfo(
-        @Path("semesterId") semesterId: Long,
         @Query("idPessoa") id: Long,
         @Query("perfil") profile: Int = 1,
-        @Query("campos", encoded = true) fields: String = "itens(id,codigo,descricao,turmas(itens(id,limiteFaltas,resultado(-%24link),classes(itens(id,descricao,tipo,alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(id,nome,codigo,ementa,cargaHoraria,departamento(nome)),ultimaAula(data),proximaAula(data),avaliacoes(itens(nome,nomeResumido,nota,avaliacoes(itens(ordinal,nomeResumido,data,peso,nota(valor))))),periodoLetivo(codigo))))",
-        @Query("embutir", encoded = true) append: String = "itens(turmas(itens(resultado,classes(itens(alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(departamento(nome),ultimaAula,proximaAula,avaliacoes(itens(avaliacoes(itens(nota)))),periodoLetivo(codigo))))",
+        @Query("campos", encoded = true) fields: String = "itens(id,codigo,descricao,turmas(itens(id,limiteFaltas,resultado(-%24link),classes(itens(atividadeCurricular(id,ementa,cargaHoraria),id,descricao,tipo,professores(itens(pessoa(id,nome,email,tipoPessoa))),alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(id,nome,codigo,ementa,cargaHoraria,departamento(nome)),ultimaAula(data),proximaAula(data),avaliacoes(itens(nome,nomeResumido,nota,avaliacoes(itens(ordinal,nomeResumido,data,peso,nota(valor))))),periodoLetivo(codigo))))",
+        @Query("embutir", encoded = true) append: String = "itens(turmas(itens(resultado,classes(itens(atividadeCurricular,professores(itens(pessoa)),alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(departamento(nome)),ultimaAula,proximaAula,avaliacoes(itens(avaliacoes(itens(nota)))),periodoLetivo(codigo))))",
         @Query("quantidade") amount: Int = 0
     ): Items<SemesterCompleteDTO>
 
@@ -48,8 +47,8 @@ interface TechNoAPI {
         @Query("idPessoa") profileId: Long,
         @Query("idPeriodoLetivo") semesterId: Long,
         @Query("perfil") profile: Int = 1,
-        @Query("embutir", encoded = true) append: String = "itens(atividadeCurricular,classes(itens(alocacoes(itens(espacoFisico,horario)))))",
         @Query("campos", encoded = true) fields: String = "itens(id,atividadeCurricular(id,codigo,nome,ementa,cargaHoraria),classes(itens(id,tipo,descricao,alocacoes(itens(espacoFisico,horario)))))",
+        @Query("embutir", encoded = true) append: String = "itens(atividadeCurricular,classes(itens(alocacoes(itens(espacoFisico,horario)))))",
         @Query("quantidade") amount: Int = 0
     ): Items<DisciplineCompleteDTO>
 
@@ -59,8 +58,8 @@ interface TechNoAPI {
         @Query("ate") until: String = "",
         @Query("quantidade") amount: Int = 10,
         @Query("perfil") profile: Int = 1,
-        @Query("embutir", encoded = true) append: String = "itens(remetente,escopos(itens(departamento(nome),professor(nome))))",
         @Query("campos", encoded = true) fields: String = "itens(id,descricao,timeStamp,remetente(nome),perfilRemetente,escopos(itens(departamento(nome),professor(nome)))),maisAntigos",
+        @Query("embutir", encoded = true) append: String = "itens(remetente,escopos(itens(departamento(nome),professor(nome))))",
     ): ItemsTimed<MessageDTO>
 
     @GET("diario/eventos-academicos")

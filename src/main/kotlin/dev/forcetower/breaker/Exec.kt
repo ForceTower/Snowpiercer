@@ -42,7 +42,7 @@ fun main() {
                 discipline.classes.forEach { clazz ->
                     println("Type: ${clazz.type}")
                     println("Allocations are shown below")
-                    clazz.allocations.sortedBy { it.time.day }.forEach { allocation ->
+                    clazz.allocations.sortedBy { it.time?.day ?: 0 }.forEach { allocation ->
                         println(allocation)
                     }
                 }
