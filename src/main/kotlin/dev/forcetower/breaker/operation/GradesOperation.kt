@@ -20,9 +20,14 @@ class GradesOperation(
                     it.activity.code,
                     it.activity.program,
                     it.activity.hours,
+                    it.activity.department.name,
                     it.classes.items.map { clazz ->
                         DisciplineClass(
+                            clazz.description,
                             clazz.type,
+                            clazz.teachers.items.first(),
+                            clazz.groupDetails.hours,
+                            clazz.groupDetails.program,
                             clazz.allocations.items
                         )
                     },
@@ -39,7 +44,8 @@ class GradesOperation(
                                 )
                             } ?: emptyList()
                         )
-                    } ?: emptyList()
+                    } ?: emptyList(),
+                    it.result
                 )
             }
             Outcome.success(result)

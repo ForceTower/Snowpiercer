@@ -3,6 +3,7 @@ package dev.forcetower.breaker.dto.base
 import com.google.gson.annotations.SerializedName
 
 data class MessageDTO(
+    val id: Long,
     @SerializedName("descricao")
     val message: String,
     @SerializedName("perfilRemetente")

@@ -75,6 +75,11 @@ class Orchestra(
     class Builder {
         private var client: OkHttpClient? = null
 
+        fun client(client: OkHttpClient?): Builder {
+            this.client = client
+            return this
+        }
+
         private fun createClient(): OkHttpClient {
             return OkHttpClient.Builder()
                 .callTimeout(2, TimeUnit.MINUTES)

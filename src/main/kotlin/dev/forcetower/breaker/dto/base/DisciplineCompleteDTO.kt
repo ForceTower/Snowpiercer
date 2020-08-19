@@ -10,7 +10,7 @@ data class DisciplineCompleteDTO(
     @SerializedName("limiteFaltas")
     val missLimit: Int?,
     @SerializedName("atividadeCurricular")
-    val activity: Discipline,
+    val activity: DisciplineDTO,
     val classes: Items<ClassCompleteDTO>,
     @SerializedName("avaliacoes")
     val evaluations: Items<EvaluationDTO>?,

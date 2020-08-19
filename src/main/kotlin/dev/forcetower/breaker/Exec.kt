@@ -19,7 +19,9 @@ fun main() {
         orchestra.setAuthorization(authorization)
 
         val start = orchestra.login()
-        println(start.isSuccess)
+        if (start is Outcome.Error) {
+            println(start.code)
+        }
         (start as? Outcome.Success)?.let { outcome ->
             val person = outcome.value
             println("Connected as ${person.name}")

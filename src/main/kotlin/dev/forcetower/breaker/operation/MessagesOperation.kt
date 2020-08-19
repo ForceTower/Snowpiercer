@@ -15,7 +15,7 @@ class MessagesOperation(
         return try {
             val messages = service.messages(profileId, until)
             val mapped = messages.items.map {
-                Message(it.message, it.sender.name, it.timestamp, it.profileType)
+                Message(it.id, it.message, it.sender.name, it.timestamp, it.profileType)
             }
             val regex = Regex("ate=(\\d+-\\d+)")
             val next = messages.nextPage?.link?.href?.let { ref ->
