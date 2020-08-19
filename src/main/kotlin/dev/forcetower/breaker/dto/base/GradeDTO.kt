@@ -7,7 +7,7 @@ data class GradeDTO(
     @SerializedName("nomeResumido")
     val name: String,
     @SerializedName("data")
-    val date: String,
+    val date: String?,
     @SerializedName("peso")
     val weight: Int,
     @SerializedName("nota")
