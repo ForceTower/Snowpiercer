@@ -6,4 +6,8 @@ data class ClassGrade(
     val date: String,
     val weight: Int,
     val value: Double?
-)
+) {
+    fun hasGrade(): Boolean {
+        return value != null
+    }
+}
