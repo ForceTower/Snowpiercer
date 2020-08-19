@@ -25,7 +25,7 @@ class GradesOperation(
                         DisciplineClass(
                             clazz.description,
                             clazz.type,
-                            clazz.teachers.items.first(),
+                            clazz.teachers?.items?.firstOrNull()?.person,
                             clazz.groupDetails.hours,
                             clazz.groupDetails.program,
                             clazz.allocations.items

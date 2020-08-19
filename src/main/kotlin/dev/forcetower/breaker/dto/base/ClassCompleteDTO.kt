@@ -14,7 +14,7 @@ data class ClassCompleteDTO(
     @SerializedName("alocacoes")
     val allocations: Items<Allocation>,
     @SerializedName("professores")
-    val teachers: Items<Person>,
+    val teachers: Items<PersonWrapperDTO>?,
     @SerializedName("atividadeCurricular")
     val groupDetails: GroupDTO
 )
