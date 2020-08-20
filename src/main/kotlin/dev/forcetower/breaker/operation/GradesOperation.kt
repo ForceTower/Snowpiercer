@@ -42,6 +42,7 @@ class GradesOperation(
                                 ClassGrade(
                                     grade.ordinal,
                                     grade.name,
+                                    grade.nameShort,
                                     grade.date,
                                     grade.weight,
                                     grade.grade?.value
