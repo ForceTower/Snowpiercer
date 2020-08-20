@@ -4,8 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 data class GradeDTO(
     val ordinal: Int,
-    @SerializedName("nomeResumido")
+    @SerializedName("nome")
     val name: String,
+    @SerializedName("nomeResumido")
+    val nameShort: String,
     @SerializedName("data")
     val date: String?,
     @SerializedName("peso")
