@@ -23,12 +23,16 @@ class GradesOperation(
                     it.activity.department.name,
                     it.classes.items.map { clazz ->
                         DisciplineClass(
+                            clazz.id,
                             clazz.description,
                             clazz.type,
                             clazz.teachers?.items?.firstOrNull()?.person,
                             clazz.groupDetails.hours,
                             clazz.groupDetails.program,
-                            clazz.allocations.items
+                            clazz.allocations.items,
+                            clazz.lectures?.items?.map { lecture ->
+                                Lecture.fromDTO(lecture)
+                            } ?: emptyList()
                         )
                     },
                     it.evaluations?.items?.map { evaluation ->

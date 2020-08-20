@@ -3,10 +3,7 @@ package dev.forcetower.breaker
 import com.google.gson.GsonBuilder
 import dev.forcetower.breaker.json.StringJsonPattern
 import dev.forcetower.breaker.model.*
-import dev.forcetower.breaker.operation.GradesOperation
-import dev.forcetower.breaker.operation.LoginOperation
-import dev.forcetower.breaker.operation.MessagesOperation
-import dev.forcetower.breaker.operation.SemestersOperation
+import dev.forcetower.breaker.operation.*
 import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
 import okhttp3.Credentials
@@ -16,7 +13,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 class Orchestra(
-    baseClient: OkHttpClient
+    baseClient: OkHttpClient,
+    agent: String
 ) {
     private var credentials: String? = null
 
@@ -26,9 +24,6 @@ class Orchestra(
 
     private val client = baseClient
         .newBuilder()
-//        .addInterceptor(HttpLoggingInterceptor().apply {
-//            level = HttpLoggingInterceptor.Level.BASIC
-//        })
         .addInterceptor { chain ->
             val url = chain.request().url
             val request = chain.request()
@@ -40,6 +35,11 @@ class Orchestra(
                         .addQueryParameter("_", "${System.currentTimeMillis()}")
                         .build()
                     url(timestampedUrl)
+                    addHeader("User-Agent", agent)
+                    addHeader("X-Requested-With", "com.tecnotrends.sagres.mobile")
+                    addHeader("Accept", "application/json, text/javascript, */*; q=0.01")
+                    addHeader("Accept-Encoding", "gzip, deflate")
+                    addHeader("Accept-Language", "en-US,en;q=0.9")
                 }
                 .build()
             return@addInterceptor chain.proceed(request)
@@ -72,11 +72,21 @@ class Orchestra(
         return MessagesOperation(profileId, until).execute(service)
     }
 
+    suspend fun lectures(classId: Long, limit: Int, offset: Int): Outcome<List<Lecture>> {
+        return LectureOperation(classId, limit, offset).execute(service)
+    }
+
     class Builder {
         private var client: OkHttpClient? = null
+        private var agent: String? = null
 
         fun client(client: OkHttpClient?): Builder {
             this.client = client
+            return this
+        }
+
+        fun userAgent(agent: String): Builder {
+            this.agent = agent
             return this
         }
 
@@ -91,7 +101,8 @@ class Orchestra(
 
         fun build(): Orchestra {
             val client = this.client ?: createClient()
-            return Orchestra(client)
+            val agent = this.agent ?: "Mozilla/5.0 (Linux; Android 10; MI 9 Build/QKQ1.190825.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/84.0.4147.125 Mobile Safari/537.36"
+            return Orchestra(client, agent)
         }
     }
 }

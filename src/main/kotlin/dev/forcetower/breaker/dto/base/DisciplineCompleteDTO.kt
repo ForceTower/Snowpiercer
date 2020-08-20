@@ -2,7 +2,6 @@ package dev.forcetower.breaker.dto.base
 
 import com.google.gson.annotations.SerializedName
 import dev.forcetower.breaker.dto.aggregators.Items
-import dev.forcetower.breaker.model.Discipline
 import dev.forcetower.breaker.model.DisciplineResult
 
 data class DisciplineCompleteDTO(
