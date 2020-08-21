@@ -6,7 +6,7 @@ data class Lecture(
     val ordinal: Int,
     val situation: Int,
     val date: String,
-    val subject: String,
+    val subject: String?,
     val materials: List<LectureMaterial>
 ) {
     companion object {
