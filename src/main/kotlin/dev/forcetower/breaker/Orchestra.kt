@@ -76,6 +76,10 @@ class Orchestra(
         return LectureOperation(classId, limit, offset).execute(service)
     }
 
+    suspend fun absences(profileId: Long, classId: Long, limit: Int, offset: Int): Outcome<List<LectureMissed>> {
+        return AbsenceOperation(profileId, classId, limit, offset).execute(service)
+    }
+
     class Builder {
         private var client: OkHttpClient? = null
         private var agent: String? = null

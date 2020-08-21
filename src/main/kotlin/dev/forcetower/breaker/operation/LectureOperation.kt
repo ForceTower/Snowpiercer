@@ -16,10 +16,8 @@ class LectureOperation(
             val lectures = response.items.map { Lecture.fromDTO(it) }
             Outcome.success(lectures)
         } catch (error: HttpException) {
-            error.printStackTrace()
             Outcome.error(error, error.code())
         } catch (error: Throwable) {
-            error.printStackTrace()
             Outcome.error(error, 500)
         }
     }

@@ -12,5 +12,5 @@ data class LectureDTO(
     @SerializedName("assunto")
     val subject: String,
     @SerializedName("materiaisApoio")
-    val materials: Items<LectureMaterialDTO>
+    val materials: Items<LectureMaterialDTO>?
 )

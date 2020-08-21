@@ -3,10 +3,7 @@ package dev.forcetower.breaker.service
 import dev.forcetower.breaker.dto.aggregators.Items
 import dev.forcetower.breaker.dto.aggregators.ItemsPaged
 import dev.forcetower.breaker.dto.aggregators.ItemsTimed
-import dev.forcetower.breaker.dto.base.DisciplineCompleteDTO
-import dev.forcetower.breaker.dto.base.LectureDTO
-import dev.forcetower.breaker.dto.base.MessageDTO
-import dev.forcetower.breaker.dto.base.SemesterCompleteDTO
+import dev.forcetower.breaker.dto.base.*
 import dev.forcetower.breaker.model.Person
 import dev.forcetower.breaker.model.Semester
 import retrofit2.http.GET
@@ -88,6 +85,17 @@ interface TechNoAPI {
         @Query("campos", encoded = true) fields: String = "proximaPagina,itens(planoAula,ordinal,data,situacao,assunto,materiaisApoio,tarefa)",
         @Query("embutir", encoded = true) append: String = "itens(materiaisApoio)"
     ): Items<LectureDTO>
+
+    @GET("diario/faltas")
+    suspend fun absences(
+        @Query("idTurma") classId: Long,
+        @Query("idPessoa") profileId: Long,
+        @Query("quantidade") limit: Int = 0,
+        @Query("tokenPagina") offset: Int = 0,
+        @Query("perfil") profile: Int = 1,
+        @Query("campos", encoded = true) fields: String = "proximaPagina,itens(id,abonada,retroativa,aula(id,ordinal,situacao,assunto,extra,data))",
+        @Query("embutir", encoded = true) append: String = "itens(aula)"
+    ): Items<MissedLectureDTO>
 
     @GET("diario/eventos-academicos")
     suspend fun events(

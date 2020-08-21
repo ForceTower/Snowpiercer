@@ -45,6 +45,20 @@ fun main() {
                     clazz.allocations.sortedBy { it.time?.day ?: 0 }.forEach { allocation ->
                         println(allocation)
                     }
+
+                    (orchestra.lectures(clazz.id, 3,0) as? Outcome.Success)?.let {
+                        println("First 3 Lectures")
+                        it.value.forEach { lecture ->
+                            println(lecture.subject)
+                        }
+                    }
+
+                    (orchestra.absences(person.id, clazz.id, 0, 0) as? Outcome.Success)?.let {
+                        println("Missed classes")
+                        it.value.forEach { missed ->
+                            println(missed.lecture.subject)
+                        }
+                    }
                 }
 
                 println("Evaluations...")

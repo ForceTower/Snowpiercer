@@ -16,13 +16,13 @@ data class Lecture(
                 lecture.situation,
                 lecture.date,
                 lecture.subject,
-                lecture.materials.items.map { material ->
+                lecture.materials?.items?.map { material ->
                     LectureMaterial(
                         material.id,
                         material.description,
                         material.url.link.href
                     )
-                }
+                } ?: emptyList()
             )
         }
     }
