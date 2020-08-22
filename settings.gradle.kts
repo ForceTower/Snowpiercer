@@ -1,3 +1,3 @@
 
-rootProject.name = "unes-magic"
+rootProject.name = "Snowpiercer"
 
