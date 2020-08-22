@@ -8,7 +8,7 @@ data class LectureDTO(
     @SerializedName("situacao")
     val situation: Int,
     @SerializedName("data")
-    val date: String,
+    val date: String?,
     @SerializedName("assunto")
     val subject: String?,
     @SerializedName("materiaisApoio")

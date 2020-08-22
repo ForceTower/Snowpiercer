@@ -13,7 +13,7 @@ data class DisciplineDTO(
     @SerializedName("cargaHoraria")
     val hours: Int,
     @SerializedName("departamento")
-    val department: DisciplineDepartment
+    val department: DisciplineDepartment?
 )
 
 data class DisciplineDepartment(

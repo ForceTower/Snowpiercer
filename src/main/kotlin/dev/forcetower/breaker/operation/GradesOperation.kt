@@ -20,7 +20,7 @@ class GradesOperation(
                     it.activity.code,
                     it.activity.program,
                     it.activity.hours,
-                    it.activity.department.name,
+                    it.activity.department?.name,
                     it.classes.items.map { clazz ->
                         DisciplineClass(
                             clazz.id,

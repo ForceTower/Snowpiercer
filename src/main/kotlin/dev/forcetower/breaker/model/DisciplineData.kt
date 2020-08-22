@@ -7,7 +7,7 @@ data class DisciplineData(
     val code: String,
     val program: String?,
     val hours: Int,
-    val department: String,
+    val department: String?,
     val classes: List<DisciplineClass>,
     val evaluations: List<ClassEvaluation>,
     val result: DisciplineResult?
