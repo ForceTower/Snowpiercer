@@ -11,7 +11,6 @@ object StringJsonPattern {
                 val string = json.asString
                 string.trim()
             } else {
-                println("Error!!!!!!!!!!!!!!!!!!!")
                 null
             }
         } catch (error: Throwable) {
