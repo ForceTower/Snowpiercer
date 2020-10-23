@@ -16,11 +16,12 @@ public class Interesting {
             var json = Files.lines(file.toPath()).collect(Collectors.joining());
             var authorization = new Gson().fromJson(json, Authorization.class);
 
-            var orchestra = new Orchestra.Builder().build();
+            var kOrchestra  = new Orchestra.Builder().build();
 //            orchestra.setAuthorization(new Authorization("actual_username", "actual_password"));
-            orchestra.setAuthorization(authorization);
+            kOrchestra.setAuthorization(authorization);
+            var orchestra = new JOrchestra(kOrchestra);
 
-            var result = new JOrchestra(orchestra).login().get();
+            var result = orchestra.login().get();
             if (result.isSuccess()) {
                 var success = result.asSuccess();
                 var person = success.getValue();
