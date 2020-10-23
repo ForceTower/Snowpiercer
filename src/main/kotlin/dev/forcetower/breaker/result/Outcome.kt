@@ -7,6 +7,9 @@ sealed class Outcome<out T> {
     val isSuccess: Boolean
         get() = this is Success
 
+    fun asSuccess() = this as Success<out T>
+    fun asError() = this as Error<out T>
+
     companion object {
         fun <T> success(value: T): Success<T> {
             return Success(value)
