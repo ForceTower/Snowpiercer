@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
-public class Interesting {
+public class JExec {
     public static void main(String[] args) {
         try {
             var file = new File("auth.json");

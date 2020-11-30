@@ -64,6 +64,10 @@ class Orchestra(
         return SemestersOperation(profileId).execute(service)
     }
 
+    suspend fun allSemestersInformation(profileId: Long): Outcome<List<SemesterInformation>> {
+        return AllSemestersInfo(profileId).execute(service)
+    }
+
     suspend fun grades(profileId: Long, semesterId: Long): Outcome<List<DisciplineData>> {
         return GradesOperation(profileId, semesterId).execute(service)
     }

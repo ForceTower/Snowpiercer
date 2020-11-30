@@ -13,7 +13,7 @@ data class ClassCompleteDTO(
     @SerializedName("tipo")
     val type: String,
     @SerializedName("alocacoes")
-    val allocations: Items<Allocation>,
+    val allocations: Items<Allocation>?,
     @SerializedName("professores")
     val teachers: Items<PersonWrapperDTO>?,
     @SerializedName("atividadeCurricular")

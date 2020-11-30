@@ -31,6 +31,14 @@ interface TechNoAPI {
         @Query("embutir", encoded = true) append: String = "turmas(itens(resultado,classes(itens(atividadeCurricular,professores(itens(pessoa)),alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(departamento(nome)),ultimaAula,proximaAula,avaliacoes(itens(avaliacoes(itens(nota)))),periodoLetivo(codigo)))"
     ): SemesterCompleteDTO
 
+    @GET("diario/periodos-letivos")
+    suspend fun gradesForTesting(
+        @Query("idPessoa") id: Long,
+        @Query("perfil") profile: Int = 1,
+        @Query("campos", encoded = true) fields: String = "itens(id,codigo,descricao,turmas(itens(id,limiteFaltas,resultado(-%24link),classes(itens(atividadeCurricular(id,ementa,cargaHoraria),id,descricao,tipo,professores(itens(pessoa(id,nome,email,tipoPessoa))))),atividadeCurricular(id,nome,codigo,ementa,cargaHoraria,departamento(nome)),ultimaAula(data),proximaAula(data),avaliacoes(itens(nome,nomeResumido,nota,avaliacoes(itens(ordinal,nomeResumido,data,nome,peso,nota(valor))))),periodoLetivo(codigo))))",
+        @Query("embutir", encoded = true) append: String = "itens(turmas(itens(resultado,classes(itens(atividadeCurricular,professores(itens(pessoa)),alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(departamento(nome)),ultimaAula,proximaAula,avaliacoes(itens(avaliacoes(itens(nota)))),periodoLetivo(codigo))))"
+    ): Items<SemesterCompleteDTO>
+
     @GET("diario/periodos-letivos/{semesterId}")
     suspend fun gradesSpicy(
         @Path("semesterId") semesterId: Long,
