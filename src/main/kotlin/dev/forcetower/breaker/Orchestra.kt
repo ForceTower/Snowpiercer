@@ -6,10 +6,13 @@ import dev.forcetower.breaker.model.*
 import dev.forcetower.breaker.operation.*
 import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.future.future
 import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
 
 class Orchestra(

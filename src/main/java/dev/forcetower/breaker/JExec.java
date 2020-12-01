@@ -20,8 +20,8 @@ public class JExec {
 
             var kOrchestra  = new Orchestra.Builder().build();
 //            orchestra.setAuthorization(new Authorization("actual_username", "actual_password"));
-            kOrchestra.setAuthorization(authorization);
             var orchestra = new JOrchestra(kOrchestra);
+            orchestra.setAuthorization(authorization);
 
             var result = orchestra.login().get();
             if (result.isSuccess()) {
@@ -51,7 +51,8 @@ public class JExec {
                                 if (time == null) return 0;
                                 return time.getDay();
                             }))
-                            .collect(Collectors.toList()).forEach(System.out::println);
+                            .collect(Collectors.toList())
+                            .forEach(System.out::println);
 
                         try {
                             var lectures = orchestra.lectures(clazz.getId(), 3, 0).get().asSuccess().getValue();
