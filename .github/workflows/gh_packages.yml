@@ -19,6 +19,9 @@ jobs:
       with:
         java-version: 11
 
+    - name: Decode Signature
+      run: gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.SEC_RING_DECRYPT_PASSWORD }}" --output secring.gpg secring.crypt.gpg
+
     - name: Dependencies
       run: ./gradlew dependencies
 
@@ -27,7 +30,7 @@ jobs:
       if: "!contains(github.event.head_commit.message, '[lint skip]')"
 
     - name: Publish Release App
-      run: ./gradlew publishMavenPublicationToGitHubPackagesRepository
+      run: ./gradlew publishMavenPublicationToGitHubPackagesRepository -Psigning.secretKeyRingFile=./secring.gpg -Psigning.password="${{ secrets.SEC_RING_PASSWORD }}" -Psigning.keyId="${{ secrets.SEC_RING_KEY_ID }}"
       if: "!contains(github.event.head_commit.message, '[publish skip]')"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
