@@ -1,0 +1,33 @@
+name: Github Package Publisher
+
+on:
+  push:
+    tags:
+      - *
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Set up JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+
+    - name: Dependencies
+      run: ./gradlew dependencies
+
+    - name: Lint & JVM Checks
+      run: ./gradlew check
+      if: "!contains(github.event.head_commit.message, '[lint skip]')"
+
+    - name: Publish Release App
+      run: ./gradlew publishMavenPublicationToGitHubPackagesRepository
+      if: "!contains(github.event.head_commit.message, '[publish skip]')"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
