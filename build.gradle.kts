@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.10"
+    kotlin("jvm") version "1.4.20"
     `maven-publish`
     signing
 }
@@ -100,6 +100,14 @@ publishing {
             credentials {
                 username = sonatypeUsername
                 password = sonatypePassword
+            }
+        }
+        maven {
+            name = "GitHubPackages"
+            setUrl("https://maven.pkg.github.com/ForceTower/Snowpiercer")
+            credentials {
+                username = "ForceTower"
+                password = project.findProperty("GITHUB_TOKEN") as String? ?: System.getenv("GITHUB_TOKEN")
             }
         }
     }
