@@ -93,8 +93,8 @@ publishing {
 
     repositories {
         maven {
-            val sonatypeUsername: String by project
-            val sonatypePassword: String by project
+            val sonatypeUsername = project.findProperty("sonatypeUsername") as String? ?: System.getenv("SONATYPE_USERNAME")
+            val sonatypePassword = project.findProperty("sonatypePassword") as String? ?: System.getenv("SONATYPE_PASSWORD")
             setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2")
             name = "maven"
             credentials {
