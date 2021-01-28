@@ -1,14 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.20"
+    kotlin("jvm") version "1.4.21"
     `maven-publish`
     signing
 }
 
 val groupName = "dev.forcetower.unes"
 val baseName = "snowpiercer"
-val artifactVersion = "1.0.10"
+val artifactVersion = "1.0.11"
 
 group = groupName
 version = artifactVersion
