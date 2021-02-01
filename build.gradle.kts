@@ -117,3 +117,6 @@ signing {
     sign(publishing.publications["maven"])
 }
 
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
