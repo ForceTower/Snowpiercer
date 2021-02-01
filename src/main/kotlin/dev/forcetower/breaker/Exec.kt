@@ -4,6 +4,8 @@ import com.google.gson.Gson
 import dev.forcetower.breaker.model.Authorization
 import dev.forcetower.breaker.result.Outcome
 import java.io.File
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.system.exitProcess
 
 suspend fun main() {
@@ -27,7 +29,7 @@ suspend fun main() {
 
         val semesters = (orchestra.semesters(person.id) as Outcome.Success).value
         println("Semesters: ${semesters.size}")
-        val last = semesters.sortedByDescending { it.id }[0]
+        val last = semesters.sortedByDescending { ZonedDateTime.parse(it.start, DateTimeFormatter.ISO_OFFSET_DATE_TIME) }[0]
 
         println("Information about ${last.code}\n")
 

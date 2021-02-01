@@ -2,6 +2,7 @@ package dev.forcetower.breaker.dto.base
 
 import com.google.gson.annotations.SerializedName
 import dev.forcetower.breaker.dto.aggregators.Items
+import java.time.ZonedDateTime
 
 data class SemesterCompleteDTO(
     val id: Long,

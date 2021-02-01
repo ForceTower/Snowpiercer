@@ -12,6 +12,7 @@ import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.ZonedDateTime
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
 
@@ -23,6 +24,7 @@ class Orchestra(
 
     private val gson = GsonBuilder()
         .registerTypeAdapter(String::class.java, StringJsonPattern.STRING_TECH_DESERIALIZER)
+        .registerTypeAdapter(ZonedDateTime::class.java, StringJsonPattern.ZONED_DATE_TIME_DESERIALIZER)
         .create()
 
     private val client = baseClient
