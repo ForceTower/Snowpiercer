@@ -9,6 +9,10 @@ data class SemesterCompleteDTO(
     val code: String,
     @SerializedName("descricao")
     val description: String,
+    @SerializedName("inicio")
+    val start: String,
+    @SerializedName("fim")
+    val end: String,
     @SerializedName("turmas")
     val disciplines: Items<DisciplineCompleteDTO>
 )

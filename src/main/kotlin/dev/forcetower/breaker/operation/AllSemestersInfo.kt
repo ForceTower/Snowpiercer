@@ -13,7 +13,7 @@ class AllSemestersInfo(
             val response = service.gradesForTesting(profileId)
             val result = response.items.map { semester ->
                 SemesterInformation(
-                    Semester(semester.id, semester.code, semester.description),
+                    Semester(semester.id, semester.code, semester.description, semester.start, semester.end),
                     semester.disciplines.items.map {
                         DisciplineData.createFromDTO(it)
                     }
