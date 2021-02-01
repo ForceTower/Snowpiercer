@@ -7,5 +7,9 @@ data class Semester(
     @SerializedName("codigo")
     val code: String,
     @SerializedName("descricao")
-    val description: String
+    val description: String,
+    @SerializedName("inicio")
+    val start: String,
+    @SerializedName("fim")
+    val end: String
 )

@@ -18,7 +18,7 @@ interface TechNoAPI {
     suspend fun semesters(
         @Query("idPessoa") id: Long,
         @Query("perfil") profile: Int = 1,
-        @Query("campos", encoded = true) fields: String = "itens(id,codigo,descricao)",
+        @Query("campos", encoded = true) fields: String = "itens(id,codigo,descricao,inicio,fim)",
         @Query("quantidade") amount: Int = 0
     ): Items<Semester>
 

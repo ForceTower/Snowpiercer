@@ -8,7 +8,7 @@ plugins {
 
 val groupName = "dev.forcetower.unes"
 val baseName = "snowpiercer"
-val artifactVersion = "1.0.11"
+val artifactVersion = "1.0.12"
 
 group = groupName
 version = artifactVersion
@@ -117,6 +117,3 @@ signing {
     sign(publishing.publications["maven"])
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}
