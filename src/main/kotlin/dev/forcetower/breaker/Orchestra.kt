@@ -77,8 +77,8 @@ class Orchestra(
         return GradesOperation(profileId, semesterId).execute(service)
     }
 
-    suspend fun messages(profileId: Long, until: String = ""): Outcome<MessagesDataPage> {
-        return MessagesOperation(profileId, until).execute(service)
+    suspend fun messages(profileId: Long, until: String = "", amount: Int = 10): Outcome<MessagesDataPage> {
+        return MessagesOperation(profileId, until, amount).execute(service)
     }
 
     suspend fun lectures(classId: Long, limit: Int, offset: Int): Outcome<List<Lecture>> {

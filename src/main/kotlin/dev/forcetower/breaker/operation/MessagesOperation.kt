@@ -9,11 +9,12 @@ import retrofit2.HttpException
 
 class MessagesOperation(
     private val profileId: Long,
-    private val until: String = ""
+    private val until: String = "",
+    private val amount: Int = 10
 ) : Operation<MessagesDataPage> {
     override suspend fun execute(service: TechNoAPI): Outcome<MessagesDataPage> {
         return try {
-            val messages = service.messages(profileId, until)
+            val messages = service.messages(profileId, until, amount)
             val mapped = messages.items.map {
                 Message(it.id, it.message, it.sender.name, it.timestamp, it.profileType)
             }
