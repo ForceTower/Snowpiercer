@@ -14,8 +14,6 @@ suspend fun main() {
 
     val file = File("auth.json")
     val authorization = gson.fromJson(file.readText(), Authorization::class.java)
-
-    // val authorization = Authorization("username", "actual_password")
     orchestra.setAuthorization(authorization)
 
     val start = orchestra.login()

@@ -72,8 +72,8 @@ interface TechNoAPI {
         @Query("ate") until: String = "",
         @Query("quantidade") amount: Int = 10,
         @Query("perfil") profile: Int = 1,
-        @Query("campos", encoded = true) fields: String = "itens(id,descricao,timeStamp,remetente(nome),perfilRemetente,escopos(itens(departamento(nome),professor(nome)))),maisAntigos",
-        @Query("embutir", encoded = true) append: String = "itens(remetente,escopos(itens(departamento(nome),professor(nome))))",
+        @Query("campos", encoded = true) fields: String = "itens(id,descricao,timeStamp,remetente(nome),perfilRemetente,escopos(itens(id,tipo,classe(id,descricao,tipo,atividadeCurricular(id,codigo,nome,nomeResumido,ementa,cargaHoraria,departamento(nome)))))),maisAntigos",
+        @Query("embutir", encoded = true) append: String = "itens(remetente,escopos(itens(classe(atividadeCurricular(departamento)))))",
     ): ItemsTimed<MessageDTO>
 
     @GET("diario/turmas/{classId}")
@@ -104,6 +104,12 @@ interface TechNoAPI {
         @Query("campos", encoded = true) fields: String = "proximaPagina,itens(id,abonada,retroativa,aula(id,ordinal,situacao,assunto,extra,data))",
         @Query("embutir", encoded = true) append: String = "itens(aula)"
     ): Items<MissedLectureDTO>
+
+    @GET("diario/solicitacoes-servico")
+    suspend fun serviceRequests(
+        @Query("idAluno") profileId: Long,
+        @Query("embutir") append: String = "itens(situacao)"
+    ): Any
 
     @GET("diario/eventos-academicos")
     suspend fun events(

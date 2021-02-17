@@ -1,14 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.21"
+    kotlin("jvm") version "1.4.30"
     `maven-publish`
     signing
 }
 
 val groupName = "dev.forcetower.unes"
 val baseName = "snowpiercer"
-val artifactVersion = "1.1.1"
+val artifactVersion = "1.1.2"
 
 group = groupName
 version = artifactVersion
@@ -75,8 +75,8 @@ publishing {
                     }
                 }
                 scm {
-                    connection.set("scm:git:git://github.com/Snowpiercer.git")
-                    developerConnection.set("scm:git:ssh://github.com/Snowpiercer.git")
+                    connection.set("scm:git:git://github.com/ForceTower/Snowpiercer.git")
+                    developerConnection.set("scm:git:ssh://github.com/ForceTower/Snowpiercer.git")
                     url.set("http://unes.forcetower.dev/snowpiercer")
                 }
             }
