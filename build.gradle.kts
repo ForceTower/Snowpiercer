@@ -1,14 +1,14 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "1.7.10"
     `maven-publish`
     signing
 }
 
 val groupName = "dev.forcetower.unes"
 val baseName = "snowpiercer"
-val artifactVersion = "1.1.3"
+val artifactVersion = "1.2.0"
 
 group = groupName
 version = artifactVersion
@@ -35,16 +35,20 @@ repositories {
 }
 
 dependencies {
-    implementation("com.squareup.okhttp3:okhttp:4.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
-    implementation("com.google.code.gson:gson:2.8.6")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("com.google.code.gson:gson:2.10")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.3.9")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.6.4")
 
     testImplementation(kotlin("test-junit"))
+}
+
+configure<JavaPluginExtension> {
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 
 publishing {
@@ -93,8 +97,8 @@ publishing {
 
     repositories {
         maven {
-            val sonatypeUsername = project.findProperty("sonatypeUsername") as String? ?: System.getenv("SONATYPE_USERNAME")
-            val sonatypePassword = project.findProperty("sonatypePassword") as String? ?: System.getenv("SONATYPE_PASSWORD")
+            val sonatypeUsername = project.findProperty("sonatypeUsername") as String? ?: System.getenv("SONATYPE_USERNAME") ?: System.getenv("sonatypeUsername")
+            val sonatypePassword = project.findProperty("sonatypePassword") as String? ?: System.getenv("SONATYPE_PASSWORD") ?: System.getenv("sonatypePassword")
             setUrl("https://oss.sonatype.org/service/local/staging/deploy/maven2")
             name = "maven"
             credentials {

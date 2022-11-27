@@ -51,7 +51,7 @@ class Orchestra(
         }.build()
 
     private val service = Retrofit.Builder()
-        .baseUrl("http://academico2.uefs.br/Api/SagresApi/")
+        .baseUrl("http://academico.uefs.br/Api/SagresApi/")
         .client(client)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
