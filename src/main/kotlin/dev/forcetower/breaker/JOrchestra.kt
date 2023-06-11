@@ -2,10 +2,12 @@ package dev.forcetower.breaker
 
 import dev.forcetower.breaker.model.*
 import dev.forcetower.breaker.result.Outcome
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.future.future
 import java.util.concurrent.CompletableFuture
 
+@OptIn(DelicateCoroutinesApi::class)
 class JOrchestra constructor(private val instance: Orchestra) {
     fun setAuthorization(authorization: Authorization) {
         instance.setAuthorization(authorization)

@@ -6,7 +6,7 @@ plugins {
 
 val groupName = "dev.forcetower.unes"
 val baseName = "snowpiercer"
-val artifactVersion = "1.3.0"
+val artifactVersion = "1.4.0"
 
 group = groupName
 version = artifactVersion
