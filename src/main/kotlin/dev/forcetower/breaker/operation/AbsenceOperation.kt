@@ -6,7 +6,7 @@ import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
 import retrofit2.HttpException
 
-class AbsenceOperation(
+internal class AbsenceOperation(
     private val profileId: Long,
     private val classId: Long,
     private val limit: Int = 0,

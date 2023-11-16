@@ -6,7 +6,7 @@ import dev.forcetower.breaker.dto.aggregators.ItemsPaged
 import dev.forcetower.breaker.model.Allocation
 import dev.forcetower.breaker.model.Person
 
-data class ClassCompleteDTO(
+internal data class ClassCompleteDTO(
     val id: Long,
     @SerializedName("descricao")
     val description: String,

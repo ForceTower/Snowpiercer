@@ -8,7 +8,7 @@ import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
 import retrofit2.HttpException
 
-class MessagesOperation(
+internal class MessagesOperation(
     private val profileId: Long,
     private val until: String = "",
     private val amount: Int = 10

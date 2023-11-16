@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import dev.forcetower.breaker.dto.aggregators.Items
 import dev.forcetower.breaker.model.DisciplineResult
 
-data class DisciplineCompleteDTO(
+internal data class DisciplineCompleteDTO(
     val id: Long,
     @SerializedName("limiteFaltas")
     val missLimit: Int?,

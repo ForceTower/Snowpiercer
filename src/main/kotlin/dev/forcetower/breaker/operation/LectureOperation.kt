@@ -5,7 +5,7 @@ import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
 import retrofit2.HttpException
 
-class LectureOperation(
+internal class LectureOperation(
     private val classId: Long,
     private val limit: Int = 0,
     private val offset: Int = 0

@@ -5,7 +5,7 @@ import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
 import retrofit2.HttpException
 
-class GradesOperation(
+internal class GradesOperation(
     private val profileId: Long,
     private val semesterId: Long,
 ) : Operation<List<DisciplineData>> {

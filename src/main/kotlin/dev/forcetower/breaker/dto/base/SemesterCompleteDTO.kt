@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import dev.forcetower.breaker.dto.aggregators.Items
 import java.time.ZonedDateTime
 
-data class SemesterCompleteDTO(
+internal data class SemesterCompleteDTO(
     val id: Long,
     @SerializedName("codigo")
     val code: String,

@@ -2,7 +2,7 @@ package dev.forcetower.breaker.dto.base
 
 import com.google.gson.annotations.SerializedName
 
-data class GroupDTO(
+internal data class GroupDTO(
     val id: Long,
     @SerializedName("cargaHoraria")
     val hours: Int,

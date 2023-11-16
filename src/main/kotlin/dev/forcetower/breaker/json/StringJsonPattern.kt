@@ -4,7 +4,7 @@ import com.google.gson.JsonDeserializer
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-object StringJsonPattern {
+internal object StringJsonPattern {
     @JvmStatic
     val STRING_TECH_DESERIALIZER: JsonDeserializer<String?> = JsonDeserializer { json, _, _ ->
         val jsonPrimitive = json.asJsonPrimitive

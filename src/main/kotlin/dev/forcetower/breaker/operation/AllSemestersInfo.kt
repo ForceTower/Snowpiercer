@@ -5,7 +5,7 @@ import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
 import retrofit2.HttpException
 
-class AllSemestersInfo(
+internal class AllSemestersInfo(
     private val profileId: Long,
 ) : Operation<List<SemesterInformation>> {
     override suspend fun execute(service: TechNoAPI): Outcome<List<SemesterInformation>> {

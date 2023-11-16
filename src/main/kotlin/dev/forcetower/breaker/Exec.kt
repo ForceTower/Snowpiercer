@@ -8,7 +8,7 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.system.exitProcess
 
-suspend fun main() {
+internal suspend fun main() {
     val gson = Gson()
     val orchestra = Orchestra.Builder().build()
 
@@ -25,13 +25,13 @@ suspend fun main() {
         val person = outcome.value
         println("Connected as ${person.name}")
 
-        val semesters = (orchestra.semesters(person.id) as Outcome.Success).value
+        val semesters = (orchestra.semesters(1000094352) as Outcome.Success).value
         println("Semesters: ${semesters.size}")
         val last = semesters.sortedByDescending { ZonedDateTime.parse(it.start, DateTimeFormatter.ISO_OFFSET_DATE_TIME) }[0]
 
         println("Information about ${last.code}\n")
 
-        val disciplines = (orchestra.grades(person.id, last.id) as Outcome.Success).value
+        val disciplines = (orchestra.grades(1000094352, last.id) as Outcome.Success).value
         println("You have ${disciplines.size} disciplines on this semester. The details are shown below")
 
         disciplines.forEach { discipline ->
@@ -52,7 +52,7 @@ suspend fun main() {
                     }
                 }
 
-                (orchestra.absences(person.id, clazz.id, 0, 0) as? Outcome.Success)?.let {
+                (orchestra.absences(1000094352, clazz.id, 0, 0) as? Outcome.Success)?.let {
                     println("Missed classes")
                     it.value.forEach { missed ->
                         println(missed.lecture.subject)
@@ -71,7 +71,7 @@ suspend fun main() {
             println("---------------------------------------------------")
         }
 
-        val messages = (orchestra.messages(person.id) as Outcome.Success).value
+        val messages = (orchestra.messages(1000094352) as Outcome.Success).value
         messages.messages.forEach { message ->
             println("Message:")
             println(message.content)

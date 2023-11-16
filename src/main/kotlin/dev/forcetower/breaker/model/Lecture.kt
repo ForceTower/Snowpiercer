@@ -10,7 +10,7 @@ data class Lecture(
     val materials: List<LectureMaterial>
 ) {
     companion object {
-        fun fromDTO(lecture: LectureDTO): Lecture {
+        internal fun fromDTO(lecture: LectureDTO): Lecture {
             return Lecture(
                 lecture.ordinal,
                 lecture.situation,

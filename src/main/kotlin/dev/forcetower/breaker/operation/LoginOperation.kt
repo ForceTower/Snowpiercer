@@ -5,7 +5,7 @@ import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
 import retrofit2.HttpException
 
-class LoginOperation : Operation<Person> {
+internal class LoginOperation : Operation<Person> {
     override suspend fun execute(service: TechNoAPI): Outcome<Person> {
         return try {
             val me = service.me()

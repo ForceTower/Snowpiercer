@@ -10,7 +10,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface TechNoAPI {
+internal interface TechNoAPI {
     @GET("eu")
     suspend fun me(): Person
 
@@ -27,8 +27,8 @@ interface TechNoAPI {
         @Path("semesterId") semesterId: Long,
         @Query("idPessoa") id: Long,
         @Query("perfil") profile: Int = 1,
-        @Query("campos", encoded = true) fields: String = "id,codigo,descricao,turmas(itens(id,limiteFaltas,resultado(-%24link),classes(itens(atividadeCurricular(id,ementa,cargaHoraria),id,descricao,tipo,professores(itens(pessoa(id,nome,email,tipoPessoa))),alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(id,nome,codigo,ementa,cargaHoraria,departamento(nome)),ultimaAula(data),proximaAula(data),avaliacoes(itens(nome,nomeResumido,nota,avaliacoes(itens(nome,ordinal,nomeResumido,data,peso,nota(valor))))),periodoLetivo(codigo)))",
-        @Query("embutir", encoded = true) append: String = "turmas(itens(resultado,classes(itens(atividadeCurricular,professores(itens(pessoa)),alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(departamento(nome)),ultimaAula,proximaAula,avaliacoes(itens(avaliacoes(itens(nota)))),periodoLetivo(codigo)))"
+        @Query("campos", encoded = true) fields: String = "id,codigo,descricao,turmas(itens(id,limiteFaltas,resultado(-%24link),classes(itens(atividadeCurricular(id,ementa,cargaHoraria),id,descricao,tipo,professores(itens(pessoa(id,nome,email,tipoPessoa))),alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(id,nome,codigo,ementa,cargaHoraria,departamento(nome)),avaliacoes(itens(nome,nomeResumido,nota,avaliacoes(itens(nome,ordinal,nomeResumido,data,peso,nota(valor))))),periodoLetivo(codigo)))",
+        @Query("embutir", encoded = true) append: String = "turmas(itens(resultado,classes(itens(atividadeCurricular,professores(itens(pessoa)),alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(departamento(nome)),avaliacoes(itens(avaliacoes(itens(nota)))),periodoLetivo(codigo)))"
     ): SemesterCompleteDTO
 
     @GET("diario/periodos-letivos")

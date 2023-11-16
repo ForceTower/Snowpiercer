@@ -6,7 +6,7 @@ import java.util.function.BiConsumer
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.CoroutineContext
 
-object Coroutines {
+internal object Coroutines {
     @JvmOverloads
     @JvmStatic
     fun <R> getContinuation(onFinished: BiConsumer<R?, Throwable?>, dispatcher: CoroutineDispatcher = Dispatchers.IO): Continuation<R> {

@@ -15,7 +15,7 @@ data class DisciplineData(
     val result: DisciplineResult?
 ) {
     companion object {
-        fun createFromDTO(it: DisciplineCompleteDTO): DisciplineData {
+        internal fun createFromDTO(it: DisciplineCompleteDTO): DisciplineData {
             return DisciplineData(
                 it.id,
                 it.activity.id,

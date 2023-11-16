@@ -3,7 +3,7 @@ package dev.forcetower.breaker.dto.base
 import com.google.gson.annotations.SerializedName
 import dev.forcetower.breaker.dto.aggregators.Items
 
-data class MessageDTO(
+internal data class MessageDTO(
     val id: Long,
     @SerializedName("descricao")
     val message: String,
@@ -17,12 +17,12 @@ data class MessageDTO(
     val scopes: Items<MessageScopeDTO>
 )
 
-data class Sender(
+internal data class Sender(
     @SerializedName("nome")
     val name: String
 )
 
-data class MessageScopeDTO(
+internal data class MessageScopeDTO(
     val id: Long,
     @SerializedName("tipo")
     val type: Int,
@@ -30,7 +30,7 @@ data class MessageScopeDTO(
     val clazz: MessageClassResumed?
 )
 
-data class MessageClassResumed(
+internal data class MessageClassResumed(
     val id: Long,
     @SerializedName("descricao")
     val description: String,
