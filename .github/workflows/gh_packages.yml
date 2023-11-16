@@ -35,8 +35,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Publish GH Package
-      run: ./gradlew publishMavenPublicationToMavenLocal -Psigning.secretKeyRingFile=./secring.gpg -Psigning.password="${{ secrets.SEC_RING_PASSWORD }}" -Psigning.keyId="${{ secrets.SEC_RING_KEY_ID }}"
+    - name: Publish Maven Repository
+      run: ./gradlew publishMavenPublicationToMavenRepository -Psigning.secretKeyRingFile=./secring.gpg -Psigning.password="${{ secrets.SEC_RING_PASSWORD }}" -Psigning.keyId="${{ secrets.SEC_RING_KEY_ID }}"
       if: "!contains(github.event.head_commit.message, '[publish skip]')"
       env:
         SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
