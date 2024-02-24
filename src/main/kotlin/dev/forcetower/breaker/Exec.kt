@@ -25,13 +25,16 @@ internal suspend fun main() {
         val person = outcome.value
         println("Connected as ${person.name}")
 
-        val semesters = (orchestra.semesters(1000094352) as Outcome.Success).value
+        val profileId = start.value.id
+        val semesters = (orchestra.semesters(profileId) as Outcome.Success).value
         println("Semesters: ${semesters.size}")
         val last = semesters.sortedByDescending { ZonedDateTime.parse(it.start, DateTimeFormatter.ISO_OFFSET_DATE_TIME) }[0]
 
         println("Information about ${last.code}\n")
 
-        val disciplines = (orchestra.grades(1000094352, last.id) as Outcome.Success).value
+
+
+        val disciplines = (orchestra.grades(profileId, last.id) as Outcome.Success).value
         println("You have ${disciplines.size} disciplines on this semester. The details are shown below")
 
         disciplines.forEach { discipline ->
@@ -52,7 +55,7 @@ internal suspend fun main() {
                     }
                 }
 
-                (orchestra.absences(1000094352, clazz.id, 0, 0) as? Outcome.Success)?.let {
+                (orchestra.absences(profileId, clazz.id, 0, 0) as? Outcome.Success)?.let {
                     println("Missed classes")
                     it.value.forEach { missed ->
                         println(missed.lecture.subject)
@@ -71,7 +74,7 @@ internal suspend fun main() {
             println("---------------------------------------------------")
         }
 
-        val messages = (orchestra.messages(1000094352) as Outcome.Success).value
+        val messages = (orchestra.messages(profileId) as Outcome.Success).value
         messages.messages.forEach { message ->
             println("Message:")
             println(message.content)
