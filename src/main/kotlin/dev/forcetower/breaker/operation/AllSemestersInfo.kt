@@ -8,9 +8,9 @@ import retrofit2.HttpException
 internal class AllSemestersInfo(
     private val profileId: Long,
 ) : Operation<List<SemesterInformation>> {
-    override suspend fun execute(service: TechNoAPI): Outcome<List<SemesterInformation>> {
+    override suspend fun execute(service: TechNoAPI, authorization: Authorization): Outcome<List<SemesterInformation>> {
         return try {
-            val response = service.gradesForTesting(profileId)
+            val response = service.gradesForTesting(createAuth(authorization), profileId)
             val result = response.items.map { semester ->
                 SemesterInformation(
                     Semester(semester.id, semester.code, semester.description, semester.start, semester.end),

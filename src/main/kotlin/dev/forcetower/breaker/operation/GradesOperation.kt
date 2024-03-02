@@ -9,9 +9,9 @@ internal class GradesOperation(
     private val profileId: Long,
     private val semesterId: Long,
 ) : Operation<List<DisciplineData>> {
-    override suspend fun execute(service: TechNoAPI): Outcome<List<DisciplineData>> {
+    override suspend fun execute(service: TechNoAPI, authorization: Authorization): Outcome<List<DisciplineData>> {
         return try {
-            val classes = service.grades(semesterId, profileId)
+            val classes = service.grades(createAuth(authorization), semesterId, profileId)
             val result = classes.disciplines.items.map {
                 DisciplineData.createFromDTO(it)
             }

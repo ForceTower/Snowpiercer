@@ -1,5 +1,6 @@
 package dev.forcetower.breaker.operation
 
+import dev.forcetower.breaker.model.Authorization
 import dev.forcetower.breaker.model.Message
 import dev.forcetower.breaker.model.MessageDiscipline
 import dev.forcetower.breaker.model.MessagesDataPage
@@ -13,9 +14,9 @@ internal class MessagesOperation(
     private val until: String = "",
     private val amount: Int = 10
 ) : Operation<MessagesDataPage> {
-    override suspend fun execute(service: TechNoAPI): Outcome<MessagesDataPage> {
+    override suspend fun execute(service: TechNoAPI, authorization: Authorization): Outcome<MessagesDataPage> {
         return try {
-            val messages = service.messages(profileId, until, amount)
+            val messages = service.messages(createAuth(authorization), profileId, until, amount)
             val mapped = messages.items.map {
                 val clazz = it.scopes.items.firstOrNull()?.clazz
                 val discipline = clazz?.let { element ->

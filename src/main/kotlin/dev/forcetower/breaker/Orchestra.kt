@@ -20,6 +20,7 @@ class Orchestra(
     baseClient: OkHttpClient,
     agent: String
 ) {
+    private var authorization: Authorization? = null
     private var credentials: String? = null
 
     private val gson = GsonBuilder()
@@ -34,8 +35,6 @@ class Orchestra(
             val request = chain.request()
                 .newBuilder()
                 .apply {
-                    val cred = credentials
-                    if (cred != null) header("Authorization", cred)
                     val timestampedUrl = url.newBuilder()
                         .addQueryParameter("_", "${System.currentTimeMillis()}")
                         .build()
@@ -58,39 +57,44 @@ class Orchestra(
         .create(TechNoAPI::class.java)
 
     fun setAuthorization(authorization: Authorization) {
+        this.authorization = authorization
         credentials = Credentials.basic(authorization.username, authorization.password)
     }
 
-    suspend fun login(): Outcome<Person> {
-        return LoginOperation().execute(service)
+    private fun requireAuthorization(): Authorization {
+        return authorization ?: throw IllegalStateException("You must set an authorization to use this resource")
     }
 
-    suspend fun semesters(profileId: Long): Outcome<List<Semester>> {
-        return SemestersOperation(profileId).execute(service)
+    suspend fun login(authorization: Authorization? = null): Outcome<Person> {
+        return LoginOperation().execute(service, authorization ?: this.requireAuthorization())
     }
 
-    suspend fun allSemestersInformation(profileId: Long): Outcome<List<SemesterInformation>> {
-        return AllSemestersInfo(profileId).execute(service)
+    suspend fun semesters(profileId: Long, authorization: Authorization? = null): Outcome<List<Semester>> {
+        return SemestersOperation(profileId).execute(service, authorization ?: this.requireAuthorization())
     }
 
-    suspend fun grades(profileId: Long, semesterId: Long): Outcome<List<DisciplineData>> {
-        return GradesOperation(profileId, semesterId).execute(service)
+    suspend fun allSemestersInformation(profileId: Long, authorization: Authorization? = null): Outcome<List<SemesterInformation>> {
+        return AllSemestersInfo(profileId).execute(service, authorization ?: this.requireAuthorization())
     }
 
-    suspend fun messages(profileId: Long, until: String = "", amount: Int = 10): Outcome<MessagesDataPage> {
-        return MessagesOperation(profileId, until, amount).execute(service)
+    suspend fun grades(profileId: Long, semesterId: Long, authorization: Authorization? = null): Outcome<List<DisciplineData>> {
+        return GradesOperation(profileId, semesterId).execute(service, authorization ?: this.requireAuthorization())
     }
 
-    suspend fun lectures(classId: Long, limit: Int, offset: Int): Outcome<List<Lecture>> {
-        return LectureOperation(classId, limit, offset).execute(service)
+    suspend fun messages(profileId: Long, until: String = "", amount: Int = 10, authorization: Authorization? = null): Outcome<MessagesDataPage> {
+        return MessagesOperation(profileId, until, amount).execute(service, authorization ?: this.requireAuthorization())
     }
 
-    suspend fun absences(profileId: Long, classId: Long, limit: Int, offset: Int): Outcome<List<LectureMissed>> {
-        return AbsenceOperation(profileId, classId, limit, offset).execute(service)
+    suspend fun lectures(classId: Long, limit: Int, offset: Int, authorization: Authorization? = null): Outcome<List<Lecture>> {
+        return LectureOperation(classId, limit, offset).execute(service, authorization ?: this.requireAuthorization())
     }
 
-    suspend fun classDetails(profileId: Long, classId: Long): Outcome<DisciplineData> {
-        return ClassDetailsOperation(classId, profileId).execute(service)
+    suspend fun absences(profileId: Long, classId: Long, limit: Int, offset: Int, authorization: Authorization? = null): Outcome<List<LectureMissed>> {
+        return AbsenceOperation(profileId, classId, limit, offset).execute(service, authorization ?: this.requireAuthorization())
+    }
+
+    suspend fun classDetails(profileId: Long, classId: Long, authorization: Authorization? = null): Outcome<DisciplineData> {
+        return ClassDetailsOperation(classId, profileId).execute(service, authorization ?: this.requireAuthorization())
     }
 
     class Builder {
@@ -109,9 +113,6 @@ class Orchestra(
 
         private fun createClient(): OkHttpClient {
             return OkHttpClient.Builder()
-                .callTimeout(2, TimeUnit.MINUTES)
-                .readTimeout(2, TimeUnit.MINUTES)
-                .writeTimeout(2, TimeUnit.MINUTES)
                 .callTimeout(2, TimeUnit.MINUTES)
                 .build()
         }

@@ -4,18 +4,21 @@ import dev.forcetower.breaker.dto.aggregators.Items
 import dev.forcetower.breaker.dto.aggregators.ItemsPaged
 import dev.forcetower.breaker.dto.aggregators.ItemsTimed
 import dev.forcetower.breaker.dto.base.*
+import dev.forcetower.breaker.model.Authorization
 import dev.forcetower.breaker.model.Person
 import dev.forcetower.breaker.model.Semester
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 internal interface TechNoAPI {
     @GET("eu")
-    suspend fun me(): Person
+    suspend fun me(@Header("Authorization") auth: String): Person
 
     @GET("diario/periodos-letivos")
     suspend fun semesters(
+        @Header("Authorization") auth: String,
         @Query("idPessoa") id: Long,
         @Query("perfil") profile: Int = 1,
         @Query("campos", encoded = true) fields: String = "itens(id,codigo,descricao,inicio,fim)",
@@ -24,6 +27,7 @@ internal interface TechNoAPI {
 
     @GET("diario/periodos-letivos/{semesterId}")
     suspend fun grades(
+        @Header("Authorization") auth: String,
         @Path("semesterId") semesterId: Long,
         @Query("idPessoa") id: Long,
         @Query("perfil") profile: Int = 1,
@@ -33,6 +37,7 @@ internal interface TechNoAPI {
 
     @GET("diario/periodos-letivos")
     suspend fun gradesForTesting(
+        @Header("Authorization") auth: String,
         @Query("idPessoa") id: Long,
         @Query("perfil") profile: Int = 1,
         @Query("campos", encoded = true) fields: String = "itens(id,codigo,descricao,inicio,fim,turmas(itens(id,limiteFaltas,resultado(-%24link),classes(itens(atividadeCurricular(id,ementa,cargaHoraria),id,descricao,tipo,professores(itens(pessoa(id,nome,email,tipoPessoa))))),atividadeCurricular(id,nome,codigo,ementa,cargaHoraria,departamento(nome)),ultimaAula(data),proximaAula(data),avaliacoes(itens(nome,nomeResumido,nota,avaliacoes(itens(ordinal,nomeResumido,data,nome,peso,nota(valor))))),periodoLetivo(codigo))))",
@@ -41,6 +46,7 @@ internal interface TechNoAPI {
 
     @GET("diario/periodos-letivos/{semesterId}")
     suspend fun gradesSpicy(
+        @Header("Authorization") auth: String,
         @Path("semesterId") semesterId: Long,
         @Query("idPessoa") id: Long,
         @Query("perfil") profile: Int = 1,
@@ -50,6 +56,7 @@ internal interface TechNoAPI {
 
     @GET("diario/periodos-letivos")
     suspend fun allSemestersWithInfo(
+        @Header("Authorization") auth: String,
         @Query("idPessoa") id: Long,
         @Query("perfil") profile: Int = 1,
         @Query("campos", encoded = true) fields: String = "itens(id,codigo,descricao,turmas(itens(id,limiteFaltas,resultado(-%24link),classes(itens(aulas(proximaPagina,itens(planoAula,ordinal,data,situacao,assunto,materiaisApoio,tarefa)),atividadeCurricular(id,ementa,cargaHoraria),id,descricao,tipo,professores(itens(pessoa(id,nome,email,tipoPessoa))),alocacoes(itens(espacoFisico,horario)))),atividadeCurricular(id,nome,codigo,ementa,cargaHoraria,departamento(nome)),ultimaAula(data),proximaAula(data),avaliacoes(itens(nome,nomeResumido,nota,avaliacoes(itens(ordinal,nomeResumido,data,peso,nota(valor))))),periodoLetivo(codigo))))",
@@ -58,6 +65,7 @@ internal interface TechNoAPI {
 
     @GET("diario/turmas")
     suspend fun classes(
+        @Header("Authorization") auth: String,
         @Query("idPessoa") profileId: Long,
         @Query("idPeriodoLetivo") semesterId: Long,
         @Query("perfil") profile: Int = 1,
@@ -68,6 +76,7 @@ internal interface TechNoAPI {
 
     @GET("diario/recados")
     suspend fun messages(
+        @Header("Authorization") auth: String,
         @Query("idPessoa") profileId: Long,
         @Query("ate") until: String = "",
         @Query("quantidade") amount: Int = 10,
@@ -78,6 +87,7 @@ internal interface TechNoAPI {
 
     @GET("diario/turmas/{classId}")
     suspend fun classDetails(
+        @Header("Authorization") auth: String,
         @Path("classId") classId: Long,
         @Query("idPessoa") profileId: Long,
         @Query("perfil") profile: Int = 1,
@@ -87,6 +97,7 @@ internal interface TechNoAPI {
 
     @GET("diario/aulas")
     suspend fun lectures(
+        @Header("Authorization") auth: String,
         @Query("idClasse") classId: Long,
         @Query("quantidade") limit: Int = 0,
         @Query("tokenPagina") offset: Int = 0,
@@ -96,6 +107,7 @@ internal interface TechNoAPI {
 
     @GET("diario/faltas")
     suspend fun absences(
+        @Header("Authorization") auth: String,
         @Query("idTurma") classId: Long,
         @Query("idPessoa") profileId: Long,
         @Query("quantidade") limit: Int = 0,
@@ -107,12 +119,14 @@ internal interface TechNoAPI {
 
     @GET("diario/solicitacoes-servico")
     suspend fun serviceRequests(
+        @Header("Authorization") auth: String,
         @Query("idAluno") profileId: Long,
         @Query("embutir") append: String = "itens(situacao)"
     ): Any
 
     @GET("diario/eventos-academicos")
     suspend fun events(
+        @Header("Authorization") auth: String,
         @Query("idPessoa") id: Long,
         @Query("desde", encoded = true) since: String, //2020-08-01T00:00:00.000Z
         @Query("ate", encoded = true) until: String //2020-08-31T00:00:00.000Z
@@ -120,6 +134,7 @@ internal interface TechNoAPI {
 
     @GET("diario/debitos")
     suspend fun debts(
+        @Header("Authorization") auth: String,
         @Query("idAluno") id: Long
     ): Any
 }

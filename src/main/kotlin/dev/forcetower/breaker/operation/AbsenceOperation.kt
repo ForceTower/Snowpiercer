@@ -1,5 +1,6 @@
 package dev.forcetower.breaker.operation
 
+import dev.forcetower.breaker.model.Authorization
 import dev.forcetower.breaker.model.Lecture
 import dev.forcetower.breaker.model.LectureMissed
 import dev.forcetower.breaker.result.Outcome
@@ -12,9 +13,9 @@ internal class AbsenceOperation(
     private val limit: Int = 0,
     private val offset: Int = 0
 ) : Operation<List<LectureMissed>> {
-    override suspend fun execute(service: TechNoAPI): Outcome<List<LectureMissed>> {
+    override suspend fun execute(service: TechNoAPI, authorization: Authorization): Outcome<List<LectureMissed>> {
         return try {
-            val response = service.absences(classId, profileId, limit, offset)
+            val response = service.absences(createAuth(authorization), classId, profileId, limit, offset)
             val absences = response.items.map {
                 LectureMissed(
                     it.id,
