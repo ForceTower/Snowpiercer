@@ -40,9 +40,11 @@ data class DisciplineData(
                 },
                 it.evaluations?.items?.map { evaluation ->
                     ClassEvaluation(
+                        evaluation.id,
                         evaluation.name,
                         evaluation.grades?.items?.map { grade ->
                             ClassGrade(
+                                grade.id,
                                 grade.ordinal,
                                 grade.name,
                                 grade.nameShort,

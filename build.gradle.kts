@@ -6,7 +6,7 @@ plugins {
 
 val groupName = "dev.forcetower.unes"
 val baseName = "snowpiercer"
-val artifactVersion = "2.1.0"
+val artifactVersion = "2.1.1"
 
 group = groupName
 version = artifactVersion
@@ -46,8 +46,8 @@ repositories {
 dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.10.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.10.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.7.3")

@@ -3,6 +3,7 @@ package dev.forcetower.breaker.dto.base
 import com.google.gson.annotations.SerializedName
 
 internal data class GradeDTO(
+    val id: String,
     val ordinal: Int,
     @SerializedName("nome")
     val name: String,

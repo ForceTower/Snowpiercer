@@ -66,7 +66,7 @@ internal suspend fun main() {
             discipline.evaluations.forEach { evaluation ->
                 println("Evaluation: ${evaluation.name}")
                 evaluation.grades.forEach { grade ->
-                    println("[${grade.date}] ${grade.name} -> ${grade.value} ** ${grade.weight}")
+                    println("[${grade.date}] ${grade.name} -> ${grade.value} ** ${grade.weight} [${grade.id}-${evaluation.id}]")
                 }
             }
 
