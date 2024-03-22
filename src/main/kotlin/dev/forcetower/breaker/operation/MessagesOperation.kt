@@ -4,7 +4,6 @@ import dev.forcetower.breaker.model.Authorization
 import dev.forcetower.breaker.model.Message
 import dev.forcetower.breaker.model.MessageDiscipline
 import dev.forcetower.breaker.model.MessagesDataPage
-import dev.forcetower.breaker.model.Semester
 import dev.forcetower.breaker.result.Outcome
 import dev.forcetower.breaker.service.TechNoAPI
 import retrofit2.HttpException

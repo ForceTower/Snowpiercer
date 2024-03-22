@@ -32,8 +32,6 @@ internal suspend fun main() {
 
         println("Information about ${last.code}\n")
 
-
-
         val disciplines = (orchestra.grades(profileId, last.id) as Outcome.Success).value
         println("You have ${disciplines.size} disciplines on this semester. The details are shown below")
 
@@ -43,6 +41,7 @@ internal suspend fun main() {
 
             discipline.classes.forEach { clazz ->
                 println("Type: ${clazz.type}")
+                println("Teacher ${clazz.teacher?.name}")
                 println("Allocations are shown below")
                 clazz.allocations.sortedBy { it.time?.day ?: 0 }.forEach { allocation ->
                     println(allocation)

@@ -97,6 +97,10 @@ class Orchestra(
         return ClassDetailsOperation(classId, profileId).execute(service, authorization ?: this.requireAuthorization())
     }
 
+    suspend fun course(profileId: Long, authorization: Authorization? = null): Outcome<Course> {
+        return CoursesOperation(profileId).execute(service, authorization ?: this.requireAuthorization())
+    }
+
     class Builder {
         private var client: OkHttpClient? = null
         private var agent: String? = null

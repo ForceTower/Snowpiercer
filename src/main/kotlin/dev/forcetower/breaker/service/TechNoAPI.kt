@@ -137,4 +137,10 @@ internal interface TechNoAPI {
         @Header("Authorization") auth: String,
         @Query("idAluno") id: Long
     ): Any
+
+    @GET("diario/solicitacao-aluno")
+    suspend fun course(
+        @Header("Authorization") auth: String,
+        @Query("idAluno") id: Long
+    ): Items<CourseDataDTO>
 }
